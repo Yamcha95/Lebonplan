@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const authRoutes = require('./routes/Auth');
 const requireAuth = require('./middlewares/auth');
-
+const expressLayouts = require('express-ejs-layouts');
 const app = express();
 
 // Connexion à MongoDB
@@ -21,6 +21,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // View engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+app.use(expressLayouts);
+app.set('layout', 'layouts/layout');
 
 // Routes publiques
 app.use('/', authRoutes);
